@@ -1,0 +1,303 @@
+================================================================================
+WEDDING PORTFOLIO — CLIENT ASSET MANAGEMENT & CUSTOMIZATION GUIDE
+================================================================================
+
+Welcome to your wedding photography and videography portfolio website!
+This guide was written specifically for you so that you can easily update,
+replace, add, and remove your wedding photographs, highlight films, video posters,
+and captions at any time without needing to touch complex web architecture.
+
+Everything in this website is built to be clean, static, fast, and simple.
+
+Table of Contents:
+--------------------------------------------------------------------------------
+1. Where to Place New Photographs
+2. Where to Place New Videos
+3. Supported Image and Video Formats
+4. Recommended File Naming Conventions
+5. How Importing Works in src/Home/Home.jsx
+6. How to Replace the Hero Image
+7. How to Replace Existing Portfolio Gallery Images
+8. How to Add a Brand New Gallery Image (Import + Array Item)
+9. How to Add or Replace Wedding Films
+10. How to Replace Video Poster Images
+11. How to Update Captions, Couple Names, and Locations
+12. How to Remove an Image or Video
+13. Why Files Must Be Imported AND Referenced
+14. How to Run Locally & Build for Deployment
+--------------------------------------------------------------------------------
+
+
+================================================================================
+1. WHERE TO PLACE NEW PHOTOGRAPHS
+================================================================================
+All photograph files must be placed directly inside this folder:
+
+    src/assets/images/
+
+Examples of files already in this folder:
+- hero-wedding.jpg       (The large photograph at the top hero section)
+- wedding-01.jpg         (Portfolio gallery photograph)
+- wedding-02.jpg         (Portfolio gallery photograph)
+- photographer.jpg       (Your portrait in the About section)
+- video-poster-01.jpg    (Preview thumbnail image for film 1)
+
+
+================================================================================
+2. WHERE TO PLACE NEW VIDEOS
+================================================================================
+All wedding film clips and video files must be placed directly inside:
+
+    src/assets/videos/
+
+Examples of files in this folder:
+- wedding-film-01.mp4
+- wedding-film-02.mp4
+
+
+================================================================================
+3. SUPPORTED IMAGE AND VIDEO FORMATS
+================================================================================
+IMAGES:
+- JPG / JPEG (.jpg, .jpeg) : Best for natural, rich wedding photography.
+- PNG (.png)               : Best for graphics or transparent portraits.
+- WEBP (.webp)             : High-performance modern format, great for fast loading.
+
+Tip on image sizing:
+- For web performance, resize your images to 2000px wide for hero images and
+  1200px–1600px wide for gallery images. Compressing them with tools like
+  TinyPNG or JPEGmini helps the website load instantly on phones.
+
+VIDEOS:
+- MP4 (.mp4 with H.264 video codec and AAC audio codec) :
+  This is the universal standard for all desktop and mobile web browsers
+  (Safari on iPhone, Chrome on Android, Firefox, Edge, etc.).
+
+
+================================================================================
+4. RECOMMENDED FILE NAMING CONVENTIONS
+================================================================================
+To keep your project clean and avoid web URL issues:
+- Use all LOWERCASE letters.
+- Use hyphens (-) instead of spaces or special characters.
+- Example: "sarah-and-david-tuscany.jpg" instead of "Sarah & David (Final Edit!).JPG".
+- Always make sure file extensions match the real file format (.jpg or .png or .mp4).
+
+IMPORTANT: File names in code are CASE-SENSITIVE!
+"wedding-01.jpg" and "Wedding-01.JPG" are treated as different files.
+Always make sure your code import matches the exact filename on your disk.
+
+
+================================================================================
+5. HOW IMPORTING WORKS IN src/Home/Home.jsx
+================================================================================
+Because this website uses Vite, every image and video stored in the assets
+folder must be imported at the top of:
+
+    src/Home/Home.jsx
+
+Look near line 10-50 in src/Home/Home.jsx. You will see:
+
+    // 1. HERO & BIO IMAGES
+    import heroImage from "../assets/images/hero-wedding.jpg";
+    import photographerImage from "../assets/images/photographer.jpg";
+
+    // 2. PORTFOLIO GALLERY IMAGES
+    import wedding01 from "../assets/images/wedding-01.jpg";
+    import wedding02 from "../assets/images/wedding-02.jpg";
+    import wedding03 from "../assets/images/wedding-03.jpg";
+
+    // 3. WEDDING VIDEOS & POSTERS
+    import weddingFilm01 from "../assets/videos/wedding-film-01.mp4";
+    import videoPoster01 from "../assets/images/video-poster-01.jpg";
+
+When you import a file, you give it a variable name (like `wedding01`) and specify
+the path to the file relative to `src/Home/`. Since `Home.jsx` is inside `src/Home/`,
+`../assets/` goes up one folder and looks into `assets`.
+
+
+================================================================================
+6. HOW TO REPLACE THE HERO IMAGE
+================================================================================
+Method A (Easiest - no code changes):
+1. Take your new favorite wedding photo.
+2. Rename it to exactly: `hero-wedding.jpg`
+3. Copy it into `src/assets/images/` and replace the existing file.
+4. Refresh your browser — your new hero image is now active!
+
+Method B (Adding a new file with a custom name):
+1. Place `elena-and-marco-sunset.jpg` in `src/assets/images/`.
+2. Open `src/Home/Home.jsx`.
+3. Locate the hero image import near the top:
+       import heroImage from "../assets/images/hero-wedding.jpg";
+4. Change it to:
+       import heroImage from "../assets/images/elena-and-marco-sunset.jpg";
+5. Save the file.
+
+
+================================================================================
+7. HOW TO REPLACE EXISTING PORTFOLIO GALLERY IMAGES
+================================================================================
+Method A (Keep the existing filenames):
+- Replace `src/assets/images/wedding-01.jpg` with your own new photo named
+  `wedding-01.jpg`.
+
+Method B (Change the file import in Home.jsx):
+1. Save your photo as `src/assets/images/sophie-lucas-cotswolds.jpg`.
+2. In `src/Home/Home.jsx`, locate:
+       import wedding01 from "../assets/images/wedding-01.jpg";
+3. Change it to:
+       import wedding01 from "../assets/images/sophie-lucas-cotswolds.jpg";
+4. In the `PORTFOLIO_ITEMS` array (around lines 50-120), update the title/caption:
+       {
+         id: 1,
+         image: wedding01,
+         title: "Sophie & Lucas",
+         location: "Cotswolds, England",
+         category: "Portraits",
+         caption: "Golden hour intimacy amidst private stone gardens."
+       }
+
+
+================================================================================
+8. HOW TO ADD A BRAND NEW GALLERY IMAGE
+================================================================================
+To add a 9th, 10th, or 20th photograph to the gallery:
+
+Step 1: Put your new photo in `src/assets/images/` (e.g. `wedding-09.jpg`).
+
+Step 2: Open `src/Home/Home.jsx` and add an import line near the other gallery
+        imports:
+        import wedding09 from "../assets/images/wedding-09.jpg";
+
+Step 3: Scroll down to the `PORTFOLIO_ITEMS` array and add a new item object:
+        {
+          id: 9,
+          image: wedding09,
+          title: "Claire & Thomas",
+          location: "Lake Como, Italy",
+          category: "Ceremony",
+          caption: "A sunlit exchange of vows overlooking the water."
+        },
+
+Step 4: Save `Home.jsx`. The new card will automatically render in the grid
+        and will also open in the lightbox viewer!
+
+
+================================================================================
+9. HOW TO ADD OR REPLACE WEDDING FILMS
+================================================================================
+All films are displayed using HTML5 native video elements, which do not
+require any monthly subscription to Vimeo or YouTube.
+
+Step 1: Place your MP4 video file into `src/assets/videos/`.
+        (e.g., `src/assets/videos/amalfi-wedding-highlights.mp4`)
+
+Step 2: Place a poster preview image into `src/assets/images/`.
+        (e.g., `src/assets/images/amalfi-poster.jpg`)
+
+Step 3: In `src/Home/Home.jsx`, import both files:
+        import amalfiFilm from "../assets/videos/amalfi-wedding-highlights.mp4";
+        import amalfiPoster from "../assets/images/amalfi-poster.jpg";
+
+Step 4: In the `WEDDING_FILMS` array, add or modify a film entry:
+        {
+          id: 3,
+          title: "Amalfi Coastal Vows",
+          couple: "Isabella & Matteo",
+          location: "Ravello, Amalfi Coast",
+          duration: "4:30 Highlight Film",
+          videoSrc: amalfiFilm,
+          posterSrc: amalfiPoster,
+          description: "An intimate sunset celebration high above the Mediterranean cliffs."
+        }
+
+
+================================================================================
+10. HOW TO REPLACE VIDEO POSTER IMAGES
+================================================================================
+A "poster" is the preview photo that shows inside the video player before the
+user presses play.
+
+1. Add your preview photo to `src/assets/images/`.
+2. Import it in `src/Home/Home.jsx`.
+3. Set `posterSrc: yourImportedPoster` on the matching entry in `WEDDING_FILMS`.
+
+
+================================================================================
+11. HOW TO UPDATE CAPTIONS, COUPLE NAMES, AND LOCATIONS
+================================================================================
+All text content is stored in clean, editable JavaScript variables right near
+the top of `src/Home/Home.jsx`:
+
+- `STUDIO_INFO`      : Studio name, tagline, email, phone, location, instagram
+- `HERO_CONTENT`     : Main headline, subheadline, button text
+- `ABOUT_CONTENT`    : Photographer bio, philosophy, awards, and credentials
+- `PORTFOLIO_ITEMS`  : List of all wedding photography photos and captions
+- `WEDDING_FILMS`    : List of all wedding film videos, durations, and summaries
+
+Simply edit the text enclosed in quotes (e.g., change "Valeria & Julian" to your
+clients' real names).
+
+
+================================================================================
+12. HOW TO REMOVE AN IMAGE OR VIDEO
+================================================================================
+If you want to take an image down:
+1. Open `src/Home/Home.jsx`.
+2. Remove or comment out that item's block from the `PORTFOLIO_ITEMS` array.
+3. Remove the corresponding `import ...` line at the top.
+4. (Optional) Delete the unused file from `src/assets/images/`.
+
+IMPORTANT: If you delete a file from the disk, you MUST also remove its `import`
+line in `Home.jsx`. Otherwise, Vite will display an error saying it cannot find
+the file.
+
+
+================================================================================
+13. WHY A NEWLY ADDED FILE MUST ALSO BE IMPORTED AND REFERENCED
+================================================================================
+In a React / Vite static application, dropping a file into a folder does not
+automatically show it on the web page.
+
+Why?
+1. The `import` statement tells the build compiler: "Include this file in the
+   optimized production bundle and assign it a secure cache-busted URL."
+2. The entry in `PORTFOLIO_ITEMS` tells React: "Render a photo card on the page
+   with this exact title, caption, and image."
+
+Both steps are necessary:
+- File on disk + Import in Home.jsx + Item in PORTFOLIO_ITEMS array = Live photo!
+
+
+================================================================================
+14. HOW TO RUN THE PROJECT LOCALLY & BUILD FOR DEPLOYMENT
+================================================================================
+Open your terminal (PowerShell, Command Prompt, or VS Code terminal) in the
+`frontend` folder:
+
+1. INSTALL DEPENDENCIES (first time only):
+       npm install
+
+2. START LOCAL PREVIEW:
+       npm run dev
+   Open your browser to http://localhost:5173 to see your live changes instantly
+   as you save your files.
+
+3. BUILD FOR PRODUCTION (when ready to publish):
+       npm run build
+   This generates an optimized, lightning-fast static folder called `dist/`.
+
+4. FREE DEPLOYMENT OPTIONS:
+   - VERCEL: Connect your GitHub repository, choose Vite preset, and click Deploy.
+   - NETLIFY: Drag-and-drop the `dist` folder into Netlify Drop, or connect GitHub.
+   - GITHUB PAGES: Run `npm run build` and publish the `dist` directory.
+
+================================================================================
+Need quick help?
+Check the top of `src/Home/Home.jsx` — every section has bright comments:
+/* --- EDIT HERO IMAGE HERE --- */
+/* --- ADD GALLERY IMAGES HERE --- */
+/* --- ADD WEDDING VIDEOS HERE --- */
+/* --- EDIT STUDIO INFO & CONTACT HERE --- */
+================================================================================
