@@ -1,7 +1,10 @@
+import React, { useState } from 'react';
+import LetterOpening from './components/LetterOpening';
 import React, { useState, useEffect, Suspense } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import './App.css';
 import bgVideo from './assets/videos/wedding-film-02.mp4';
+
 
 // 3D Components (lazy loaded for performance)
 const FloatingPetals = React.lazy(() => import('./components/FloatingPetals'));
