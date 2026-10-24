@@ -1,10 +1,10 @@
+import React, { useState } from 'react';
+import LetterOpening from './components/LetterOpening';
 import React, { useState, useEffect, Suspense } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import './App.css';
 import bgVideo from './assets/videos/wedding-film-02.mp4';
 
-// Letter opening gate
-import LetterOpening from './components/LetterOpening';
 
 // 3D Components (lazy loaded for performance)
 const FloatingPetals = React.lazy(() => import('./components/FloatingPetals'));
@@ -26,7 +26,6 @@ import { OrnamentDivider, HeartDivider, CornerFlourish } from './components/Orna
 import Gallery from './components/Gallery';
 
 function App() {
-  const [hasOpened, setHasOpened] = useState(false);
   const [timeLeft, setTimeLeft] = useState(calculateTimeLeft());
   const [showContent, setShowContent] = useState(false);
 
@@ -59,14 +58,8 @@ function App() {
     };
   }, []);
 
-  // 1. If the envelope hasn't been opened, render ONLY the envelope
-  if (!hasOpened) {
-    return <LetterOpening onOpen={() => setHasOpened(true)} />;
-  }
-
-  // 2. Once opened, render the rest of the website
   return (
-    <div className="app-container fade-in-website">
+    <div className="app-container">
       {/* ── 3D Overlays ──────────────────────────────────────── */}
       <Suspense fallback={null}>
         <FloatingPetals />
