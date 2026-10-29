@@ -1,5 +1,3 @@
-import React, { useState } from 'react';
-import LetterOpening from './components/LetterOpening';
 import React, { useState, useEffect, Suspense } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import './App.css';
