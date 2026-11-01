@@ -1,20 +1,56 @@
 @import "tailwindcss";
 
-/* ── Global index styles (minimal — App.css handles the main design) ── */
-:root {
-  font-synthesis: none;
-  text-rendering: optimizeLegibility;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
+@layer base {
+  html, body {
+    margin: 0;
+    padding: 0;
+    background-color: #170310;
+    color: #f7e1b5;
+    font-family: 'Cormorant Garamond', 'Cinzel Decorative', Georgia, serif;
+    overflow-x: hidden;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+  }
 }
 
-body {
-  margin: 0;
-  padding: 0;
+/* Custom Web Fonts */
+.font-cormorant {
+  font-family: 'Cormorant Garamond', Georgia, serif;
 }
 
-#root {
-  width: 100%;
-  max-width: 100%;
-  margin: 0;
+.font-playfair {
+  font-family: 'Playfair Display', Georgia, serif;
+}
+
+.font-cinzel {
+  font-family: 'Cinzel Decorative', Georgia, serif !important;
+}
+
+.font-dancing {
+  font-family: 'Dancing Script', cursive !important;
+}
+
+.font-great-vibes {
+  font-family: 'Great Vibes', cursive !important;
+}
+
+/* Custom Scrollbar */
+::-webkit-scrollbar {
+  width: 8px;
+}
+::-webkit-scrollbar-track {
+  background: #170310;
+}
+::-webkit-scrollbar-thumb {
+  background: #6e171f;
+  border-radius: 4px;
+}
+::-webkit-scrollbar-thumb:hover {
+  background: #8e1f29;
+}
+
+/* Selection Color */
+::selection {
+  background: #e91e63;
+  color: #ffffff;
 }
